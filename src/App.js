@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
-import { Movies } from './components/movie/Movies.js'
+import { AllMovies } from './components/AllMovies.js'
 
 function App() {
   const [data, setData] = useState(null);
@@ -11,14 +11,14 @@ function App() {
         return res.json();
       })
       .then(data => {
-        setData(data)
+        setData(data.items)
       })
 
   }, []);
 
   return (
     <div>
-      {data && <Movies data={data} />}
+      {data && <AllMovies movies={data} />}
     </div>
 
   );
