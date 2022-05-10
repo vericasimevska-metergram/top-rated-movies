@@ -1,24 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+import { Movies } from './components/movie/Movies.js'
 
 function App() {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetch('https://imdb-api.com/en/API/Top250Movies/k_sf83blu8')
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        setData(data)
+      })
+
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {data && <Movies data={data} />}
     </div>
+
   );
 }
 
